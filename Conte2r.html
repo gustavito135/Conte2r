@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporizador Medieval</title>
+<style>
+  body {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 36px;
+    color: white;
+  }
+</style>
+</head>
+<body>
+  <div id="timer">1000000000:00:00</div>
+
+  <script>
+    function updateTimer() {
+      const countdownDate = new Date().getTime() + (1000000000 * 60 * 60 * 1000);
+
+      const interval = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        const hours = Math.floor(distance / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("timer").innerHTML = `${hours}:${minutes}:${seconds}`;
+
+        if (distance < 0) {
+          clearInterval(interval);
+          document.getElementById("timer").innerHTML = "¡Tiempo expirado!";
+        }
+      }, 1000);
+    }
+
+    updateTimer();
+  </script>
+</body>
+</html>
